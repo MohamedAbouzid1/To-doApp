@@ -1,5 +1,5 @@
 {
-  "name": "chapter3",
+  "name": "To-do app",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -10,12 +10,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "Full stack web application with Nodejs and jwt authentication",
+  "description": "A dockerized full stack web application with Nodejs, PostgreSQL database, Prisma ORM and jwt authentication",
   "dependencies": {
+    "@prisma/client": "^6.16.3",
     "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "prisma": "^6.16.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }

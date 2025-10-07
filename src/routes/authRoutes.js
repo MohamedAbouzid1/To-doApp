@@ -1,8 +1,9 @@
 import express from 'express';
 import bcrypt, { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../db.js';
 import StatusCodes from 'http-status-codes'; 
+import prisma from '../prismaClient.js';
+
 
 const router = express.Router();
 
@@ -32,23 +33,29 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/register', (req, res) => {
+router.post('/register', async(req, res) => {
     const { username, password }= req.body;
     // encrypt password
     const hashedPassword = bcrypt.hashSync(password, 8);
     try {
-        const insertUser = db.prepare( `INSERT INTO users (username, password)
-            VALUES(?,?)`)
-        const result = insertUser.run(username, hashedPassword)
+        const user = await prisma.user.create({
+            data: {
+                username,
+                password: hashedPassword
+            }
+        })
 
         // add the first todo for the user
         const defaultTodo = `Hey, this is your first todo`
-        const insertTodo = db.prepare( `INSERT INTO todos (user_id, task)
-            VALUES(?,?)`)
-        insertTodo.run(result.lastInsertRowid, defaultTodo)
+        const todo = await prisma.todo.create({
+            data: {
+                task: defaultTodo,
+                userId: user.id,
+            }
+        })
 
         // create token
-        const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET, {expiresIn: '24h'})
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
         res.json({ token })
     } catch (err) {
         console.log(err.message);
@@ -95,11 +102,14 @@ router.post('/register', (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const {username, password } = req.body;
     try {
-        const getUser = db.prepare( `SELECT * FROM users WHERE username= ?`)
-        const user = getUser.get(username)
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
         // if we can't find username return out of the function
         if (!user) { return res.status(StatusCodes.NOT_FOUND).send({message: `user not found`})}
 
