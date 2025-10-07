@@ -24,7 +24,7 @@ A modern full-stack Todo application built with Node.js, Express.js, SQLite, and
 
 ## 📋 Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v22 or higher)
 - npm (Node Package Manager)
 
 ## 🚀 Quick Start
@@ -33,8 +33,7 @@ A modern full-stack Todo application built with Node.js, Express.js, SQLite, and
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd chapter3
+git clone https://github.com/MohamedAbouzid1/To-doApp
 
 # Install dependencies
 npm install
@@ -45,7 +44,7 @@ npm install
 Create a `.env` file in the root directory:
 
 ```env
-JWT_SECRET=your_super_secret_jwt_key_here_make_it_long_and_random_123456789
+JWT_SECRET=your_super_secret_jwt_key
 PORT=5000
 ```
 
@@ -156,7 +155,6 @@ chapter3/
 
 ```bash
 npm run dev    # Start development server with auto-reload
-npm test       # Run tests (placeholder)
 ```
 
 ### Database Schema
@@ -188,14 +186,6 @@ CREATE TABLE todos (
 3. **Database errors**: The app uses in-memory SQLite, data resets on restart
 4. **CORS issues**: All requests are from same origin, no CORS needed
 
-### Debug Mode
-
-Enable debug logging by setting environment variables:
-
-```bash
-DEBUG=* npm run dev
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -204,24 +194,8 @@ DEBUG=* npm run dev
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - Built as part of a full-stack development course
 - Uses modern web technologies and best practices
 - Inspired by clean, minimal todo applications
-
-## 📞 Support
-
-If you have any questions or need help, please:
-
-1. Check the [API Documentation](API_DOCUMENTATION.md)
-2. Review the Swagger UI at `/api-docs`
-3. Open an issue in the repository
-
----
-
-**Happy Coding! 🎉**
