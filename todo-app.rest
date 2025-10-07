@@ -1,0 +1,47 @@
+### GET /
+GET http://localhost:5000
+
+### REGISTER NEW USER
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "username": "mohamedabouzid@gmail.com",
+    "password": "12345678"
+}
+
+### LOGIN USER
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "username": "mohamedabouzid@gmail.com",
+    "password": "12345678"
+}
+
+### fetch all todos GET /todos (protected)
+GET http://localhost:5000/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU5ODM4MjEyLCJleHAiOjE3NTk5MjQ2MTJ9.RA8UdPxXmXubJm8XqkMXHljYS3jr3X7Pj6-kpyj-ChA
+
+### create a new todo POST /todos (protected)
+POST http://localhost:5000/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU5ODM4MjEyLCJleHAiOjE3NTk5MjQ2MTJ9.RA8UdPxXmXubJm8XqkMXHljYS3jr3X7Pj6-kpyj-ChA
+Content-Type: application/json
+
+{
+    "task": "Finish your presentation"
+}
+
+### update a todo PUT /todos/:id (protected)
+PUT http://localhost:5000/todos/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU5ODM4MjEyLCJleHAiOjE3NTk5MjQ2MTJ9.RA8UdPxXmXubJm8XqkMXHljYS3jr3X7Pj6-kpyj-ChA
+Content-Type: application/json
+
+{
+    "completed": 1
+
+}
+
+### delete a todo DELETE /todos/:id (protected)
+DELETE http://localhost:5000/todos/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU5ODM4MjEyLCJleHAiOjE3NTk5MjQ2MTJ9.RA8UdPxXmXubJm8XqkMXHljYS3jr3X7Pj6-kpyj-ChA

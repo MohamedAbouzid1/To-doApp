@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import todoRoutes from './routes/todoRoutes.js'
 import authMidlleware from './middleware/authMiddleware.js';
+import { specs, swaggerUi } from './swagger.js';
 
 const app = express();
 
@@ -25,8 +26,15 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // getting the html from the public directory
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
 })
+
+// Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Todo App API Documentation'
+}));
 
 // ROUTES
 app.use('/auth', authRoutes);
